@@ -59,13 +59,11 @@ class DLinkedList:
         # Handle case where Position = self.__size or rather tail position.
         # Borrow from the append function.
         elif pos == self.__size:
-            temp = DLinkedListNode(item, None, None)
-            if (self.__head == None):
-                self.__head = temp
-            else:
+            temp = DLinkedListNode(item, None, self.__tail)
+            if self.__tail:
                 self.__tail.setNext(temp)
-                temp.setPrevious(self.__tail)
-
+            else:
+                self.__head = temp
             self.__tail = temp
             self.__size += 1  # Increase the size of the list by one to account for inserted item.
 
@@ -132,6 +130,19 @@ class DLinkedList:
 
             data[position] = temp
 
+    def traverse(self):
+        '''
+        Iterate over the DlinkedList, appending each nodes data to the list result.
+        :return: (list) result: A list with all the nodes from the linked list.
+        '''
+        current = self.__head
+        result = []
+
+        while current:
+            result.append(current.getData())
+            current = current.getNext()
+
+        return result
 
     # Display Function
     def __str__(self):
