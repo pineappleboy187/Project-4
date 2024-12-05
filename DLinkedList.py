@@ -46,7 +46,7 @@ class DLinkedList:
 
         # Handle case where Position = 0 or at the head of the list.
 
-        if pos == 0:
+        if team_name == 0:
             temp = DLinkedListNode(item, self.__head, None)
             if self.__head != None:
                 self.__head.setPrevious(temp)

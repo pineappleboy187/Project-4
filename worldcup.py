@@ -2,8 +2,40 @@ import time
 import os
 import random
 
-def groupStage():
+def initialize_teams():
+    """
+    Initialize 32 unique teams with names and return them in a list.
+
+    Example: ["Team A", "Team B", ..., "Team Z"]
+    """
+
+    teams = [] # Blank list to hold the unique teams.
+
+    # Load team data from teams.csv.
+    with open('teams.csv') as file: # Open CSV file.
+        lines = file.readlines()    # Read line by line from the file.
+
+    for line in lines[1:]:  # Ignore the title for each column.
+        parsedLine = line.strip()   # Remove spacing before and after each string.
+        group, team, power = parsedLine.split(",")  # Parse data based on column it is found under.
+
+        teams.append(team.strip())
+
+    return teams # Return a list of teams
+
+
+
+
+    # Divide 32 teams into 8 groups of 4 teams each.
+    # Group A, Group B, Group C, Group D, Group E, Group F, Group E, Group G, Group H
+
+
+    # Organize teams into group-linked lists.
+
+#   TODO: Create and return a list of team names.
+
     pass
+
 # GROUP STAGE
 # Divide 32 teams into 8 groups of 4 teams each.
 
@@ -14,8 +46,30 @@ def groupStage():
 # After each match, update the linked list for each group.
 # Teams are ranked by points, and the top 2 teams from each group advance.
 
-def knockoutStage():
+def group_stage_matches(groups, linked_lists):
+    """
+    Conduct the group stage matches where teams within each group play against each other.
+
+    Each match should assign points to the teams and update their rankings in the linked list.
+    """
+
+
+#     TODO: Implement match results with random outcomes.
+#     For each match, update the linked list to reflect the new rankings.
     pass
+
+
+def promote_teams(groups, linked_lists):
+    """
+    Identify the top two teams from each group to move on to the knockout stage.
+
+    Remove teams ranked 3rd and 4th in each group from the linked list.
+    """
+
+
+#   TODO: Implement logic to promote top teams and eliminate others.
+    pass
+
 # KNOCKOUT STAGE
 # Conduct single-elimination rounds for the top 16 teams
 # (winners from the group stage)
@@ -27,24 +81,61 @@ def knockoutStage():
 
 # Continue rounds until one team emerges as the champion.
 
-def matchSimualtionStatistics():
+def knockout_stage(teams, linked_list):
+    """
+    Conduct the knockout stage where teams are paired randomly.
+
+    The losing team is removed from the linked list, and the winner moves on to the next round.
+    """
+
+#  TODO: Implement single-elimination logic until one team remains.
+
     pass
+
 # Implement randomized match results to simulate real game outcomes.
 # Track each team's wins, draws and losses. Store wins, losses, and draws directly.
 
-def display():
+def knockout_competition(teams):
+    # Function to simulate knockout matches and find the champion with a fixed bracket structure
+    # Define bracket for Round of 16 based on group winners and runners-up
+
+    # Round of 16
+
+    # Quarterfinals
+
+    # Semifinals
+
+    # Final
+
+    #return champion
     pass
-# Implement the display functions so users are able to:
-#   View current rankings, showing teams' standings and points after the group and knockout stages.
-#   Display detailed match statistics for each team, such as total wins, draws, and losses, after each group or knockout stages.
-#       Display a summary of match results for each game, a single table for each of the groups and knockout stages.
+
 
 def main():
-    pass
+    """
+    Run the World Cup simulation.
 
-# Load team data from teams.csv.
+    This function should:
+    1. Initialize the teams and groups.
+    2. Conduct the group stage, updating rankings with each match.
+    3. Promote teams and set up the knockout stage.
+    4. Continue until a winner is determined.
+    """
+    # Initialize teams and linked list for rankings
 
-# Organize teams into group-linked lists.
+
+    # TODO: Assign teams to groups and start group stage
+
+    # TODO: Promote teams to knockout stage
+
+    # Initialize new linked list for knockout stage
+
+    # TODO: Run knockout stage and determine the winner
+
+
+if __name__ == "__main__":
+    main()
+
 
 # Run the group stage matches.
 
@@ -63,8 +154,3 @@ def main():
 # on penalties).
 
 # Output for group stage and knockout stage looks like the following.
-
-main()
-
-
-
