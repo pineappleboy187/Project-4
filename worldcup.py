@@ -1,15 +1,20 @@
 import time
 import os
 import random
+from logging import DEBUG
+
+from LinkedList import DLinkedList
 
 def initialize_teams():
     """
     Initialize 32 unique teams with names and return them in a list.
 
+
     Example: ["Team A", "Team B", ..., "Team Z"]
     """
 
-    teams = [] # Blank list to hold the unique teams.
+    # Initialize Empty DoubleLinked List for Teams from CSV file.
+    teams = DLinkedList()
 
     # Load team data from teams.csv.
     with open('teams.csv') as file: # Open CSV file.
@@ -19,22 +24,9 @@ def initialize_teams():
         parsedLine = line.strip()   # Remove spacing before and after each string.
         group, team, power = parsedLine.split(",")  # Parse data based on column it is found under.
 
-        teams.append(team.strip())
+        teams.insert(team.strip()) # Insert teams into their respective DoubleLinkedLists.
 
-    return teams # Return a list of teams
-
-
-
-
-    # Divide 32 teams into 8 groups of 4 teams each.
-    # Group A, Group B, Group C, Group D, Group E, Group F, Group E, Group G, Group H
-
-
-    # Organize teams into group-linked lists.
-
-#   TODO: Create and return a list of team names.
-
-    pass
+    return teams # Returns a list of teams.
 
 # GROUP STAGE
 # Divide 32 teams into 8 groups of 4 teams each.
@@ -46,12 +38,55 @@ def initialize_teams():
 # After each match, update the linked list for each group.
 # Teams are ranked by points, and the top 2 teams from each group advance.
 
+def initialize_team_groups():
+    '''
+    Initialize DLinkedList groupings based off Group A through H found in CSV file.
+    :return: groups (Dct) : A dictionary holding teams based on their respective groups.
+    '''
+    # Initialize Empty DoubleLinked List for Rankings based on Groupings from CSV file.
+    groups = {}
+    for group in "ABCDEFGH": # Create A DLinkedList for each group A through H.
+        groups[group] = DLinkedList()
+
+    # Load team data from teams.csv.
+    with open('teams.csv') as file: # Open CSV file.
+        lines = file.readlines()    # Read line by line from the file.
+
+    for line in lines[1:]:  # Ignore the title for each column.
+        parsedLine = line.strip()   # Remove spacing before and after each string.
+        group, team, power = parsedLine.split(",")  # Parse data based on column it is found under.
+
+        groups[group].insert(team.strip()) # Insert teams into their respective DoubleLinkedLists.
+
+    return groups # Return a dictionary of teams based on groupings.
+
+
 def group_stage_matches(groups, linked_lists):
     """
     Conduct the group stage matches where teams within each group play against each other.
 
     Each match should assign points to the teams and update their rankings in the linked list.
     """
+
+    # Each Team plays a math against every other team in its group.
+    # Options are Win, Draw, Loss.
+
+
+    # Skeleton Code #
+    # Group A
+    #
+
+    # Win = 3, Draw = 1, Loss = 0
+    numbers = [3, 1, 0]
+
+    random_number = random.choice(numbers) # Random Integer chosen from the list 3, 1, 0.
+
+    print(random_number) # Testing
+
+
+
+    # Update their respective scores.
+
 
 
 #     TODO: Implement match results with random outcomes.
@@ -122,7 +157,17 @@ def main():
     4. Continue until a winner is determined.
     """
     # Initialize teams and linked list for rankings
+    teams = initialize_teams()
 
+    print("All Teams:", teams.display_rankings()) # Test to see if all teams were initialized into teams DLinkedList
+
+    groupings = initialize_team_groups()
+    print("Group A Teams:", groupings['A'].display_rankings()) # Testing to see if data has been loaded in.
+
+    group_stage_matches(None, None)
+
+
+    
 
     # TODO: Assign teams to groups and start group stage
 
